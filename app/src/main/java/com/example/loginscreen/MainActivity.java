@@ -1,13 +1,17 @@
 package com.example.loginscreen;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
     private Button clearButton;
+    private TextView usernameErrorMessage;
+    private TextView passwordErrorMessage;
 
     private int attemptsLeft = 3;
 
@@ -28,6 +34,60 @@ public class MainActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         clearButton = findViewById(R.id.clearButton);
+        usernameErrorMessage = findViewById(R.id.usernameErrorMessage);
+        passwordErrorMessage = findViewById(R.id.passwordErrorMessage);
+
+        // Set up a TextWatcher for usernameEditText
+        usernameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                // Not needed for this example
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                // Not needed for this example
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Change text color and display error message if length is less than 4
+                if (editable.length() < 4) {
+                    usernameErrorMessage.setTextColor(Color.RED);
+                    usernameErrorMessage.setText("Username must be at least 4 characters");
+                } else {
+                    // Reset text color and clear error message if length is 4 or more
+                    usernameErrorMessage.setTextColor(Color.TRANSPARENT);
+                    usernameErrorMessage.setText("");
+                }
+            }
+        });
+
+        // Set up a TextWatcher for passwordEditText
+        passwordEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                // Not needed for this example
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                // Not needed for this example
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Change text color and display error message if length is less than 4
+                if (editable.length() < 4) {
+                    passwordErrorMessage.setTextColor(Color.RED);
+                    passwordErrorMessage.setText("Password must be at least 4 characters");
+                } else {
+                    // Reset text color and clear error message if length is 4 or more
+                    passwordErrorMessage.setTextColor(Color.TRANSPARENT);
+                    passwordErrorMessage.setText("");
+                }
+            }
+        });
 
         // Set click listener for login button
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         // Check if credentials are correct
         if (username.equals("admin") && password.equals("admin")) {
             // Successful login
-            Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Redirecting...", Toast.LENGTH_SHORT).show();
 
             // Start the DisplayLoggedInActivity and pass the username
             Intent intent = new Intent(MainActivity.this, DisplayLoggedInActivity.class);

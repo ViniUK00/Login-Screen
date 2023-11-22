@@ -38,26 +38,41 @@
 
     <EditText
         android:id="@+id/usernameEditText"
-        android:layout_below="@id/uwlLogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@id/uwlLogo"
         android:hint="Username"
         android:inputType="text"
         android:maxLength="20"
         android:padding="8dp" />
 
+    <TextView
+        android:id="@+id/usernameErrorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usernameEditText"
+        android:text=""
+        android:textColor="@android:color/holo_red_dark" />
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/usernameEditText"
-        android:layout_marginBottom="16dp"
+        android:layout_below="@id/usernameErrorMessage"
+        android:layout_marginTop="16dp"
         android:hint="Password"
         android:inputType="textPassword"
         android:maxLength="20"
         android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/passwordErrorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passwordEditText"
+        android:text=""
+        android:textColor="@android:color/holo_red_dark" />
 
     <Button
         android:id="@+id/loginButton"
