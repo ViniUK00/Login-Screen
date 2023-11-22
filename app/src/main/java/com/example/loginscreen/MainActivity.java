@@ -1,6 +1,8 @@
 package com.example.loginscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +60,14 @@ public class MainActivity extends AppCompatActivity {
         if (username.equals("admin") && password.equals("admin")) {
             // Successful login
             Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-            // TODO: Start another activity here (e.g., displayLoggedInActivity())
+
+            // Start the DisplayLoggedInActivity and pass the username
+            Intent intent = new Intent(MainActivity.this, DisplayLoggedInActivity.class);
+            intent.putExtra("USERNAME", username);
+            startActivity(intent);
+
+            // Finish the MainActivity to prevent going back to it using the back button
+            finish();
         } else {
             // Incorrect credentials
             attemptsLeft--;
